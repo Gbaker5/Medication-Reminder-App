@@ -2,7 +2,7 @@
 const express = require('express')
 const bodyParser= require('body-parser')
 const app = express()
-const PORT = 8000
+const PORT = 1400
 const mongoose = require("mongoose");
 require('dotenv').config()
 const MedicationToAdd = require('./models/addmed.js');
