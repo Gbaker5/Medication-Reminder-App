@@ -5,7 +5,7 @@ const app = express()
 const PORT = 1400
 const mongoose = require("mongoose");
 require('dotenv').config()
-const MedicationToAdd = require('./models/addmed.js');
+const MedicationToAdd = require('./models/addmed');
 
 
 //middleware
@@ -76,31 +76,29 @@ app
         
         
         MedicationToAdd.find({}, (err, Medications) => { //retreive collection from db again "medicatioToAdd" is db and "Medications" is the collection
-        res.render('edit.ejs', {Meds: Medications, idMed: id }) //"Meds" = list of all meds and "idMed" = specific med to edit by id
+        res.render('edit.ejs', {Meds: Medications, idMed: id }) //"Meds" = list of all meds and "idMed" = specific med to edit by id (render as ejs with these two as key value pairs)
             //console.log(Medications)
             //console.log(id)
             //console.log(res)
+            console.log(req.body)
         })
         })
     .post((req,res) => {
-        
+        console.log(req.body)
         const id = req.params.id
         console.log(`THIS IS THE ID ${id}`)
         
             MedicationToAdd.findByIdAndUpdate( //requires id and structure to update (similar to original get post)
            
         id, 
-
            {
-            $set:{
                Medication: req.body.Medication,
                Strength: req.body.Strength,
                Quantity: req.body.Quantity,
                Type: req.body.Type,
                Time: req.body.Time
-            }
-           },
-           { new: true},
+            },
+           
            console.log('edited'),
            err => {
             if (err) return res.status(500).send(err)
