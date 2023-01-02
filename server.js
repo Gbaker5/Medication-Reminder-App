@@ -84,9 +84,9 @@ app
         })
         })
     .post((req,res) => {
-        console.log(req.body)
+        //console.log(req.body)
         const id = req.params.id
-        console.log(`THIS IS THE ID ${id}`)
+        
         
             MedicationToAdd.findByIdAndUpdate( //requires id and structure to update (similar to original get post)
            
@@ -99,7 +99,7 @@ app
                Time: req.body.Time
             },
            
-           console.log('edited'),
+           console.log(`${req.body.Medication} edited`),
            err => {
             if (err) return res.status(500).send(err)
             res.redirect('/')
@@ -107,33 +107,17 @@ app
             
     })
    
-    //edit page
-    //app
-    
-    //.post('/edit/:id' (req,res) => { //will find existing item in db by id and then update
-        
-        //console.log('edited med')
-        //const id = req.params.id
-        
-        
-            //MedicationToAdd.findByIdAndUpdate( //requires id and structure to update (similar to original get post)
-           
-        //id, 
-           //{
-               //Medication: req.body.Medication,
-               //Strength: req.body.Strength,
-               //Quantity: req.body.Quantity,
-               //Type: req.body.Type,
-               //Time: req.body.Time
-           //})
-           //console.log('edited')
-       //}catch (err) {
-        //if (err) return res.status(600).send(err) 
-        //res.redirect('/')
-        //}
-    
-    //})
-    
+    //DELETE
+    app
+    .route("/remove/:id")
+    .get((req, res) => {
+        const id = req.params.id;
+        MedicationToAdd.findByIdAndRemove(id, err => {
+            console.log('Medication deleted')
+            if (err) return res.send(500, err);
+            res.redirect("/");
+        });
+    });
 
 app.listen(PORT, () => {
     console.log(`Im running on port ${PORT}`)

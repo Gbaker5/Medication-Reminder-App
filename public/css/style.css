@@ -1,0 +1,27 @@
+/**{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+*/
+body{
+    background:linear-gradient(#399cbd,#9ed1e1, #399cbd)
+}
+
+ul{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid white;
+}
+
+li{
+    list-style-type: none;
+    margin:1rem;
+    display:block;
+}
+
+.medication-items{
+    display:inline-block;
+    border:1px solid black;
+}

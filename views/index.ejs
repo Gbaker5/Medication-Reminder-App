@@ -36,19 +36,19 @@
      <ul class= "meds-list">
         <% Meds.forEach(med => {%> <!--"Meds" is the keyword from server.js-->
         <li class="med-list-item">
-            <div class= "med-list-item-title">
+            <div class= "med-list-item-title medication-items">
                 <%= med.Medication %>
             </div>
-            <div class= "med-list-item-strength">
+            <div class= "med-list-item-strength medication-items">
                 <%= med.Strength %>
             </div>
-            <div class= "med-list-item-quantity">
+            <div class= "med-list-item-quantity medication-items">
                 <%= med.Quantity %>
             </div>
-            <div class= "med-list-item-type">
+            <div class= "med-list-item-type medication-items">
                 <%= med.Type %>
             </div>
-            <div class= "med-list-item-time">
+            <div class= "med-list-item-time medication-items">
                 <%= med.Time %>
             </div>
             <a href="/edit/<%=med._id%>" class="edit"><span class="fa-solid fa-pen-to-square"></span></a>
