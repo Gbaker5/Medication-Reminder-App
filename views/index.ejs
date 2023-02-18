@@ -13,10 +13,12 @@
     <script src="https://kit.fontawesome.com/d7ccb43ad1.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Medication Reminder</h1>
+<h1 id="heads">Medication Reminder</h1>
 
 <h2>Medication List</h2>
-<p>Enter your medication(s) below and add them to your list <br> Once they've been added you can edit and delete the items.</p>
+<p>Enter your medication(s) below and add them to your list. 
+    <br> Once they've been added you can mark a medication as <strong>taken</strong> or not taken, 
+    <br> you may also <strong>edit</strong> and <strong>delete</strong> medications.</p>
 
 <!--Info form-->
 <form action="/" method="POST">
@@ -30,26 +32,30 @@
 </form>
 
 <section class="med-container">
-    <h2>Meds to take</h2>
+    <h2 id="header">Meds to take</h2>
     <section class="meds">
    
      <ul class= "meds-list">
         <% Meds.forEach(med => {%> <!--"Meds" is the keyword from server.js-->
         <li class="med-list-item">
+            <!--<label class="container">-->
+                <!--<input type="checkbox" >-->
+                <!--<span class="checkmark"></span>-->
+            <!--</label>-->
             <div class= "med-list-item-title medication-items">
-                <%= med.Medication %>
+                <span><%= med.Medication %></span>
             </div>
             <div class= "med-list-item-strength medication-items">
-                <%= med.Strength %>
+                <span><%= med.Strength %></span>
             </div>
             <div class= "med-list-item-quantity medication-items">
-                <%= med.Quantity %>
+                <span><%= med.Quantity %></span>
             </div>
             <div class= "med-list-item-type medication-items">
-                <%= med.Type %>
+                <span><%= med.Type %></span>
             </div>
             <div class= "med-list-item-time medication-items">
-                <%= med.Time %>
+                <span><%= med.Time %></span>
             </div>
             <a href="/edit/<%=med._id%>" class="edit"><span class="fa-solid fa-pen-to-square"></span></a>
             <a href="/remove/<%=med._id%>" class="remove"><span class="fa-solid fa-circle-xmark"></span></a>
@@ -67,7 +73,6 @@
     </section>
 </section>
 
-
-
+<script>src="main.js"</script>
 </body>
 </html>

@@ -20,6 +20,7 @@ const addMedSchema = new mongoose.Schema({// template for our database
         type: String,
         required: true
     },
+    completed: false
 })
 
 module.exports = mongoose.model('medicationToAdd', addMedSchema, 'Medications') //'medicationToAdd' is model name, 'schema is template', 'tasks' is collection name

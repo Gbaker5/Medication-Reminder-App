@@ -8,10 +8,14 @@ body{
     background:linear-gradient(#399cbd,#9ed1e1, #399cbd)
 }
 
+h1, h2, p, form{
+    text-align: center;
+}
+
 ul{
     display:flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
     border: 1px solid white;
 }
 
@@ -21,7 +25,18 @@ li{
     display:block;
 }
 
+.med-list-item{
+    display:flex;
+    flex-direction:row;
+    
+}
+
 .medication-items{
-    display:inline-block;
-    border:1px solid black;
+    justify-content: space-between;
+   
+    cursor: pointer;
+}
+
+.completed{
+    text-decoration: line-through;
 }

@@ -2,7 +2,7 @@
 const express = require('express')
 const bodyParser= require('body-parser')
 const app = express()
-const PORT = 1400
+const PORT = 1500
 const mongoose = require("mongoose");
 require('dotenv').config()
 const MedicationToAdd = require('./models/addmed');
@@ -24,10 +24,7 @@ app.get('/', async (req, res) => {
        MedicationToAdd.find({}, (err, Medications) => { //"medicationToAdd" connects to database and returns array of all collection documents
         res.render("index.ejs", {Meds: Medications }) //render the page in ejs. refernces collection "Medications" and changes the keyword to "Meds"
         //console.log(Medications) // console logs Collection
-       })
-       
-      
-       
+       }) 
         
     } catch (err) {
         res.status(500).send({message: error.message})
@@ -46,7 +43,8 @@ app.post('/', async (req,res) =>{
             Strength: req.body.Strength,
             Quantity: req.body.Quantity,
             Type: req.body.Type,
-            Time: req.body.Time
+            Time: req.body.Time,
+            completed: false
         }
         
     )
@@ -66,7 +64,7 @@ app.post('/', async (req,res) =>{
     //response.redirect('/')
 })
 
-//Edit or UPDATE Method
+//Edit and UPDATE Method
 app
     .route('/edit/:id')
     .get((req,res) => { 
@@ -112,12 +110,49 @@ app
     .route("/remove/:id")
     .get((req, res) => {
         const id = req.params.id;
+        console.log(id)
         MedicationToAdd.findByIdAndRemove(id, err => {
             console.log('Medication deleted')
             if (err) return res.send(500, err);
             res.redirect("/");
         });
     });
+
+    //UPDATE COMPLETE OR NOT COMPLETE
+    app.put('/markComplete', (request, response) => {
+        console.log(req.body)
+        MedicationToAdd.updateOne({Medication: request.body.itemFromJS},{ //go to collection then update this specific item whos property matches the "req.body.itemFromJS" (Ex: "Get Pizza" is itenFromJS)
+            $set: {
+                completed: true  //change the completed value from false to true
+              }
+        },{
+            sort: {_id: -1}, 
+            upsert: false
+        })
+        .then(result => {
+            console.log('Marked Complete')
+            response.json('Marked Complete')
+        })
+        .catch(error => console.error(error))
+    
+    })
+    
+    app.put('/markUnComplete', (request, response) => {
+        db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+            $set: {
+                completed: false
+              }
+        },{
+            sort: {_id: -1},
+            upsert: false
+        })
+        .then(result => {
+            console.log('Marked UnComplete')
+            response.json('Marked UnComplete')
+        })
+        .catch(error => console.error(error))
+    
+    })
 
 app.listen(PORT, () => {
     console.log(`Im running on port ${PORT}`)
